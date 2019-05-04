@@ -9,10 +9,17 @@ class UsersController < ApplicationController
 	end
 
 	def search
-		if params[:friend].present?
-			@friends = User.search(params[:friend])
-			render json: @friends 
+		if params[:search_value].present?
+			@friends = User.search(params[:search_value])
+			if @friends.present?
+				render 'users/my_friends'
+			else
+				flash[:danger] = "No friends match with this search criteria."
+				redirect_to my_friends_path
+			end
 		else
+			flash[:danger] = "You have entered an empty string."
+			redirect_to my_friends_path
 		end
 	end
 end

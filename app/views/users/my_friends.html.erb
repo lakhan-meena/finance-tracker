@@ -1,5 +1,5 @@
 <%= render 'friendships/friend_lookup' %>
-<% if @friendships.size > 0 %>
+<% if @friendships.present? && @friendships.size > 0 %>
 	<table class="table table-striped">
 		<thead>
 			<tr>
